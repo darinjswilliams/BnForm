@@ -24,9 +24,14 @@ Manufacturer ManufacturerCountry UPC
 Hazard
 Remedy
 Retailer
+
 In addition, a non‐field parameter is available:
 format: determines the output format. Possible values are XML or JSON. The default value is XML .
 Desired search parameters are to be appended to the root URI in the form of HTML query strings, as in the following example, which is an URI to retrieve recalls such that the title contains the string "child" and the description contains the string "metal":
+
 http://www.saferproducts.gov/RestWebServices/Recall?RecallTitle=child&RecallDescription=metal
+
 Note that neither "child" nor "metal" need be an actual word in the respective fields. For instance, a recall had the proper noun Fairchild in the title and the qualifier non‐metallic in the description would be a match for the above request.
-The following URI will retrieve the same result set as above in Json format: http://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Child&RecallDescription=metal
+The following URI will retrieve the same result set as above in Json format:
+
+http://www.saferproducts.gov/RestWebServices/Recall?format=json&RecallTitle=Child&RecallDescription=metal
