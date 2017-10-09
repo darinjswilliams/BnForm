@@ -11,6 +11,8 @@ import UIKit
 class SafetyPopUp: UIViewController {
 
     
+    //Manage Popup Windows
+    
     
     @IBOutlet weak var safetyPopupView: UIView!
     
