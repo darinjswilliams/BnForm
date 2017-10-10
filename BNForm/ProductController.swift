@@ -47,6 +47,89 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
     
     var recallSvcCache = RecallSvcCache()
     
+    
+    func nsurlSession(){
+        //Rest Service
+        let requestURL:NSURL = NSURL(string: "https://www.saferproducts.gov/RestWebServices/Recall?Title=Child&RecallDescription=metal&format=Json")!
+        
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL as URL)
+        
+        //Create URL Session
+        let session = URLSession.shared
+        
+        
+        //Create Background task
+        let task = session.dataTask(with: urlRequest as URLRequest){
+            (data, response, error) -> Void in
+            
+            let httpResponse = response as! HTTPURLResponse
+            
+            let statusCode = httpResponse.statusCode
+            
+            if(statusCode == 200){
+                
+                print("Response Recieved")
+                
+                do{
+                    //parse the json response
+                    let json = try JSONSerialization.jsonObject(with: data!, options:.allowFragments)
+                    
+                    print(json) //used for debugging
+                    
+                    //Get the json recall array
+                    if let recallItems = json["Recall"] as! [[String: Any]]{
+                          let  recallItems = parsedData
+                        
+                        print(recallItems)
+                        //Iterate thru Recall array
+                        for recallItem in recallItems{
+                            
+                            if let id = recallItem["RecallNumber"] as? String{
+                                
+                                if let name = recallItem["Name"] as? String{
+                                    
+                                    if let imgPic = recallItem["Images"] as? UIImage{
+                                        
+                                        print(id,name)
+                                        
+                                        let aRecallItem = RecallProducts()
+                                        aRecallItem.id = Int(id)
+                                        aRecallItem.name = name
+                                        aRecallItem.image = imgPic
+                                        
+                                        //populate table cell
+                                        //self.recallItems.append(contentsOf: aRecallItem)
+                                        recallSvcCache.create(recallProduct: aRecallItem)
+
+                                    }
+
+                               }
+                                    
+                                
+                            } //id closure
+                            
+                        } // for
+                        
+                    } // if
+                }  catch{
+                    
+                    print("Error with json \(error)")
+                }
+                //Start foreground task
+                DispatchQueue.main.async(){
+                    //reload table cell
+                    
+                    
+                }
+                
+            }
+        }
+        task.resume()
+        
+        
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         print("ViewDidAppear", safetyItems.description)
     }
@@ -118,6 +201,8 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //Display list of programs with scene is loaded
+        nsurlSession()
     
         //Register table View
         self.recallTableView.register(UITableViewCell.self, forCellReuseIdentifier: "RecallCells")
@@ -125,8 +210,9 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
         
         self.safetyTableView.register(UITableViewCell.self, forCellReuseIdentifier: "SafetyCells")
         
+        
      
-        saveRecallProducts()
+       // saveRecallProducts()
         saveSafeProducts()
 
     }

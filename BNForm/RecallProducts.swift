@@ -13,12 +13,14 @@ class RecallProducts{
     
     
     //["In123478","IN345677","IN678900"]
+    var id:Int
     var description:String
     var image:UIImage?
     
     init(){
         description = ""
         image = nil
+        id = 0
     }
     
     
@@ -28,5 +30,13 @@ class RecallProducts{
     
     func getDescription()->String{
         return description
+    }
+    
+    func getId()-> Int{
+        return id
+    }
+    
+    func toString()->String{
+        return "\(image) \(id) \(description)"
     }
 }
