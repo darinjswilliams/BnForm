@@ -16,21 +16,59 @@ class BNFormTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    func testNSurl(){
+        
+        
+        let requestURL:NSURL = NSURL(string: "https://www.saferproducts.gov/RestWebServices/Recall?Title=Child&RecallDescription=metal&format=Json")!
+        
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL as URL)
+        
+        //Create URL Session
+        let session = URLSession.shared
+        
+        
+        //Create Background task
+        let task = session.dataTask(with: urlRequest as URLRequest){
+            (data, response, error) -> Void in
+            
+            let httpResponse = response as! HTTPURLResponse
+            
+            let statusCode = httpResponse.statusCode
+            if(statusCode == 200){
+                
+                print("Response Recieved")
+                
+                do{
+                    if let data = data,
+                    //parse the json response as a dictionary
+                     let json = try JSONSerialization.jsonObject(with: data, options:.allowFragments ) as? [String: Any],
+ 
+                      let recallItems = json["Recall"] as? [[String: Any]]{
+                        for rItem in recallItems{
+                            if let rnum = rItem["RecallNumber"] as? String{
+                                
+                                print(rnum)
+                            }
+                            
+                        }
+
+                    
+                    }
+                    
+                    
+                } catch{
+                    
+                    print("Error with json \(error)")
+                    
+                }// do catch
+                
+            } //StatusCode
+            
+                       
+
+            
+        } //Backgound task
+        
+    }//testNSurl
     
 }

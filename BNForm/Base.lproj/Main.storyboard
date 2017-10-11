@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="KaT-Ov-AyY">
-                                <rect key="frame" x="16" y="199.5" width="343" height="268.5"/>
+                                <rect key="frame" x="16" y="202.5" width="343" height="262.5"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="458-Ba-vDQ">
                                         <rect key="frame" x="107" y="0.0" width="129" height="29"/>
@@ -54,8 +54,9 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVx-hC-8Kz">
-                                        <rect key="frame" x="0.0" y="228.5" width="343" height="40"/>
-                                        <state key="normal" title="Sign In" backgroundImage="submitBtn">
+                                        <rect key="frame" x="0.0" y="228.5" width="343" height="34"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Sign In">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -573,7 +574,6 @@ The wiggle ball’s rubber knobs and plastic back can detach, posing a choking h
         <image name="focus" width="150" height="150"/>
         <image name="resistBnds" width="268" height="230"/>
         <image name="scanButton" width="136" height="140"/>
-        <image name="submitBtn" width="284" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uNs-iO-uvd"/>
