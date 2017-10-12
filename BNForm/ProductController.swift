@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class RecallPopulationCells: UITableViewCell{
     
@@ -81,13 +83,14 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
             cellData.recallDesc.text = recallSvcCache.getRecallProduct(index: indexPath.row).description
             
             //Get Image
-            cellData.imgRecall.image = recallSvcCache.getRecallProduct(index: indexPath.row).image
+            
+            cellData.imgRecall.image = recallSvcCache.getRecallProduct(index: indexPath.row).image[0]
             
             return cellData
             
         }
         
-        if tableView == self.safetyTableView{
+               if tableView == self.safetyTableView{
             
             
             let cellData:SafetyPopulationCells = self.safetyTableView.dequeueReusableCell(withIdentifier: "safetyCells", for: indexPath) as! SafetyPopulationCells
@@ -120,11 +123,7 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
 
         // Do any additional setup after loading the view.
         //Display list of programs with scene is loaded
-        print("calling NsurlSession")
-
-        nsurlSession()
-    
-        print("return from NsurlSession")
+        alamofire()
     
     
         //Register table View
@@ -140,28 +139,76 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
 
     }
     
-    func nsurlSession(){
-        
-        let requestURL:NSURL = NSURL(string: "https://www.saferproducts.gov/RestWebServices/Recall?Title=Child&RecallDescription=metal&format=Json")!
-        
-        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL as URL)
-        
-        //Create URL Session
-        let session = URLSession.shared
-        
-        
-        //Create Background task
-        let task = session.dataTask(with: urlRequest as URLRequest){
-            (data, response, error) -> Void in
-
-            let httpResponse = response as! HTTPURLResponse
-            let statusCode = httpResponse.statusCode
-
-            if(statusCode == 200){
+    func alamofire(){
+        Alamofire.request("https://www.saferproducts.gov/RestWebServices/Recall?format=json&Images=Child&RecallDescription=metal&DateEnd=2016-01-01&ProductName=ball").responseJSON{ response in
+       
+            
+            if let value = response.result.value{
                 
-                print("Response Received")
+                
+                var dictionary = [String]()
+                var imgPic = [UIImage]()
+                
+                if let value = response.result.value {
+                    
+
+                    
+                    let dictionary = value as! NSArray
+                    
+                    
+                    
+                    for aImage in dictionary as! [Dictionary<String, AnyObject>]{
+                        
+                            //Initialize Recall Products
+                            let recallProducts = RecallProducts()
+                        
+                        
+                            //Get Images Arrary
+                            let imgPhoto = aImage["Images"] as! NSArray
+                        
+                            //Get Recall Number
+                            let  recallNumber = aImage["RecallNumber"] as! String
+                        
+
+                            //Populate Model RecallNumber
+                            recallProducts.id = Int(recallNumber)!
+                        
+                            //Get Images
+                        for aImgPhoto in imgPhoto as! [Dictionary<String, AnyObject>]{
+                            
+                            if let fndImg = aImgPhoto["URL"] as? String {
+ 
+                                  print(fndImg)
+                                
+                                //Get image from URL
+                                Alamofire.request(fndImg).responseImage(completionHandler: { (response) in
+                                    print(response)
+                                    if let image = response.result.value{
+                                        recallProducts.image.append(image)
+                                    }
+                                    
+                                })
+                              } //Closure for image
+                            
+                            }
+                       
+                            print(recallProducts.toString())
+                            //Add to array
+                            self.recallItems.append(recallProducts)
+                        
+                                        
+                      }
+                    DispatchQueue.main.async {
+                        self.recallTableView.reloadData()
+                    }
+
+                }
+                
+             
             }
-        }// background task
+            
+            
+        } //end of responseJson
         
     }
 
@@ -187,7 +234,7 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
         
         let recallProduct = RecallProducts()
         recallProduct.description = "Wiggle Ball"
-        recallProduct.image = #imageLiteral(resourceName: "WiggleBall")
+        recallProduct.image = [#imageLiteral(resourceName: "WiggleBall")]
         recallSvcCache.create(recallProduct: recallProduct)
         }
 

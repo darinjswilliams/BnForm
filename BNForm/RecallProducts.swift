@@ -15,17 +15,17 @@ class RecallProducts{
     //["In123478","IN345677","IN678900"]
     var id:Int
     var description:String
-    var image:UIImage?
+    var image:[UIImage] = []
     
     init(){
         description = ""
-        image = nil
+        image = []
         id = 0
     }
     
     
-    func getImage()->UIImage{
-        return image!
+    func getImage()->[UIImage]{
+        return image
     }
     
     func getDescription()->String{
