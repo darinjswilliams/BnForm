@@ -12,20 +12,26 @@ import UIKit
 class RecallProducts{
     
     
-    //["In123478","IN345677","IN678900"]
     var id:Int
     var description:String
-    var image:[UIImage] = []
+    var image:UIImage?
+    var notes:String
+    var imgPhotos:String
     
     init(){
         description = ""
-        image = []
+        image = nil
         id = 0
+        notes = ""
+        imgPhotos = ""
     }
     
+    func getImgPhotos()->String{
+        return imgPhotos
+    }
     
-    func getImage()->[UIImage]{
-        return image
+    func getImage()->UIImage{
+        return image!
     }
     
     func getDescription()->String{
@@ -34,6 +40,10 @@ class RecallProducts{
     
     func getId()-> Int{
         return id
+    }
+    
+    func getNotes()->String{
+        return notes;
     }
     
     func toString()->String{

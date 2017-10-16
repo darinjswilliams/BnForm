@@ -47,7 +47,7 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
     
     var safeProductSvcCache = ProductSvcCache()
     
-    var recallSvcCache = RecallSvcCache()
+    var recallSvc: RecallSvc = RecallSvcCache.getInstance()
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,7 +59,8 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
         var count:Int?
         
         if tableView == self.recallTableView{
-            count = recallSvcCache.getCount()
+            count = recallSvc.retrieveAll().count
+            print("Recall Svc Cache Count", count)
         }
         
         if tableView == self.safetyTableView{
@@ -80,12 +81,13 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
             
             
             //Get Text from DataSource
-            cellData.recallDesc.text = recallSvcCache.getRecallProduct(index: indexPath.row).description
+            cellData.recallDesc.text = recallSvc.getRecallProduct(index: indexPath.row).description
             
             //Get Image
+            cellData.imgRecall.image = recallSvc.getRecallProduct(index: indexPath.row).image
+
             
-            cellData.imgRecall.image = recallSvcCache.getRecallProduct(index: indexPath.row).image[0]
-            
+
             return cellData
             
         }
@@ -157,21 +159,36 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
                     
                     
                     
-                    for aImage in dictionary as! [Dictionary<String, AnyObject>]{
+                    for dataInfo in dictionary as! [Dictionary<String, AnyObject>]{
                         
                             //Initialize Recall Products
                             let recallProducts = RecallProducts()
                         
                         
                             //Get Images Arrary
-                            let imgPhoto = aImage["Images"] as! NSArray
+                            let imgPhoto = dataInfo["Images"] as! NSArray
                         
                             //Get Recall Number
-                            let  recallNumber = aImage["RecallNumber"] as! String
+                            let  recallNumber = dataInfo["RecallNumber"] as! String
                         
+                        
+                            let aProduct = dataInfo["Products"] as! NSArray
 
                             //Populate Model RecallNumber
                             recallProducts.id = Int(recallNumber)!
+                        
+                        
+                        for prodDesc in aProduct as! [Dictionary<String, AnyObject>]{
+                            
+                            if let foundProdct = prodDesc["Name"] as? String{
+                                
+                                //popuate service
+                                recallProducts.description = foundProdct
+                                
+                            }
+                            
+                            
+                        } //end of product description
                         
                             //Get Images
                         for aImgPhoto in imgPhoto as! [Dictionary<String, AnyObject>]{
@@ -183,20 +200,30 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
                                 //Get image from URL
                                 Alamofire.request(fndImg).responseImage(completionHandler: { (response) in
                                     print(response)
+                                    
+                                    // Call DispatchQueue here
                                     if let image = response.result.value{
-                                        recallProducts.image.append(image)
+                                       recallProducts.image = image
+                                        self.recallSvc.create(recallProduct: recallProducts)
+//                                        recallProducts.image.append(image)
                                     }
                                     
                                 })
                               } //Closure for image
                             
-                            }
-                       
-                            print(recallProducts.toString())
-                            //Add to array
-                            self.recallItems.append(recallProducts)
+                            }// Image for loop
                         
-                                        
+                        
+                        
+                        
+                       
+//                            print(recallProducts.toString())
+                            //Add to array
+//                            self.recallItems.append(recallProducts)
+                        
+                        //Call service
+                        
+                       
                       }
                     DispatchQueue.main.async {
                         self.recallTableView.reloadData()
@@ -232,10 +259,10 @@ class ProductController: UIViewController,UITableViewDelegate, UITableViewDataSo
     
     func saveRecallProducts(){
         
-        let recallProduct = RecallProducts()
-        recallProduct.description = "Wiggle Ball"
-        recallProduct.image = [#imageLiteral(resourceName: "WiggleBall")]
-        recallSvcCache.create(recallProduct: recallProduct)
+//        let recallProduct = RecallProducts()
+//        recallProduct.description = "Wiggle Ball"
+//        recallProduct.image = [#imageLiteral(resourceName: "WiggleBall")]
+//        recallSvc.create(recallProduct: recallProduct)
         }
 
     /*

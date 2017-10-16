@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,12 +89,12 @@
                         <outlet property="signInLabel" destination="4AU-wz-d8T" id="hcJ-Uf-st7"/>
                         <outlet property="signInRegisterButton" destination="FVx-hC-8Kz" id="8as-vV-rAB"/>
                         <outlet property="signInSelector" destination="458-Ba-vDQ" id="a71-i6-yyA"/>
-                        <segue destination="obC-bz-zeu" kind="show" identifier="goToHome" id="uNs-iO-uvd"/>
+                        <segue destination="obC-bz-zeu" kind="presentation" identifier="goToHome" id="Ff9-rd-e8c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-150" y="-26"/>
+            <point key="canvasLocation" x="-474" y="-49"/>
         </scene>
         <!--Product Controller-->
         <scene sceneID="LOa-7u-4Xm">
@@ -152,7 +153,7 @@
                                     <outlet property="delegate" destination="obC-bz-zeu" id="P1r-9b-gSZ"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5IX-qF-g14" userLabel="Safety Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5IX-qF-g14" userLabel="Safety Table View">
                                 <rect key="frame" x="9" y="322" width="343" height="172"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,15 +220,15 @@
                                     <segue destination="zQZ-Ed-tzw" kind="presentation" identifier="goToScan" id="gyJ-kK-P92"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recall Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSN-5L-pgN">
-                                <rect key="frame" x="97" y="83" width="148" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NO4-tE-ibe">
+                                <rect key="frame" x="41" y="568" width="125" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Scan Product" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NO4-tE-ibe">
-                                <rect key="frame" x="41" y="568" width="125" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recall Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSN-5L-pgN">
+                                <rect key="frame" x="97" y="59" width="148" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -247,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YMh-Fk-EQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-38"/>
+            <point key="canvasLocation" x="650" y="-49"/>
         </scene>
         <!--Scan View Controller-->
         <scene sceneID="dXU-UU-YWo">
@@ -305,6 +306,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q28-Or-Vol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1653.5999999999999" y="-38.23088455772114"/>
+        </scene>
+        <!--Recall Products View Controller-->
+        <scene sceneID="Khp-Da-Krm">
+            <objects>
+                <viewController id="xfL-zg-KIU" userLabel="Recall Products View Controller" customClass="SafetyViewController" customModule="BNForm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x5c-ZX-kcM"/>
+                        <viewControllerLayoutGuide type="bottom" id="YC5-2p-nD2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8dN-oy-2B1" customClass="RecallControllerTableViewCell" customModule="BNForm" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xgf-bs-4Gh">
+                                <rect key="frame" x="24" y="49" width="326" height="294"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellRecall" rowHeight="141" id="q1o-Ay-hrQ" customClass="RecallControllerTableViewCell" customModule="BNForm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="326" height="141"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q1o-Ay-hrQ" id="tz2-k1-zeR">
+                                            <rect key="frame" x="0.0" y="0.0" width="293" height="140.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="za0-No-ZGz">
+                                                    <rect key="frame" x="2" y="16" width="116" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="za0-No-ZGz" secondAttribute="height" multiplier="122:101" id="S4L-cq-VZR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRw-t4-Crw">
+                                                    <rect key="frame" x="126" y="60" width="78.5" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="JRw-t4-Crw" secondAttribute="height" multiplier="153:40" id="33Y-7g-7ZD"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="JRw-t4-Crw" secondAttribute="bottom" constant="26.5" id="1lU-wb-14Z"/>
+                                                <constraint firstItem="za0-No-ZGz" firstAttribute="top" secondItem="tz2-k1-zeR" secondAttribute="top" constant="6" id="7AY-jS-wgR"/>
+                                                <constraint firstItem="za0-No-ZGz" firstAttribute="leading" secondItem="tz2-k1-zeR" secondAttribute="leading" constant="2" id="Fvi-B0-FUZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="za0-No-ZGz" secondAttribute="bottom" constant="0.5" id="Li3-OQ-zpw"/>
+                                                <constraint firstItem="JRw-t4-Crw" firstAttribute="trailing" secondItem="tz2-k1-zeR" secondAttribute="trailingMargin" id="aI9-Jh-xzi"/>
+                                                <constraint firstItem="JRw-t4-Crw" firstAttribute="leading" secondItem="za0-No-ZGz" secondAttribute="trailing" constant="8" id="abK-mi-Ofe"/>
+                                                <constraint firstItem="JRw-t4-Crw" firstAttribute="top" secondItem="tz2-k1-zeR" secondAttribute="topMargin" constant="25" id="ca9-Co-StZ"/>
+                                                <constraint firstItem="JRw-t4-Crw" firstAttribute="leading" secondItem="za0-No-ZGz" secondAttribute="trailing" constant="8" id="hcD-8M-odd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="recallDesc" destination="JRw-t4-Crw" id="3he-Cj-Udz"/>
+                                            <outlet property="recallImage" destination="za0-No-ZGz" id="62S-jN-LyQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="xfL-zg-KIU" id="jYT-gZ-gGB"/>
+                                    <outlet property="delegate" destination="xfL-zg-KIU" id="l9p-bS-CY9"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wdM-ng-ber" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-474.39999999999998" y="755.17241379310349"/>
         </scene>
         <!--SafetyPopup-->
         <scene sceneID="Nlq-oz-x0X">
@@ -527,6 +598,7 @@ The wiggle ball’s rubber knobs and plastic back can detach, posing a choking h
                                 <state key="normal" title="Re-Scan"/>
                                 <connections>
                                     <action selector="performRescan:" destination="TSC-vX-hNd" eventType="touchUpInside" id="Wzg-0O-fHE"/>
+                                    <segue destination="zQZ-Ed-tzw" kind="presentation" identifier="goToScan" id="rmT-fx-lpP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -561,12 +633,11 @@ The wiggle ball’s rubber knobs and plastic back can detach, posing a choking h
                         <outlet property="name" destination="UzW-9b-25l" id="zcG-Nx-edF"/>
                         <outlet property="notes" destination="fbZ-Qo-3Rx" id="JiH-fn-3RO"/>
                         <outlet property="rptImage" destination="TYJ-A5-IWt" id="b83-KR-2g8"/>
-                        <segue destination="obC-bz-zeu" kind="presentation" identifier="goToReScan" id="KWc-F4-5gf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uOT-MA-zWg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="775"/>
+            <point key="canvasLocation" x="1938" y="803"/>
         </scene>
     </scenes>
     <resources>
@@ -576,6 +647,6 @@ The wiggle ball’s rubber knobs and plastic back can detach, posing a choking h
         <image name="scanButton" width="136" height="140"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uNs-iO-uvd"/>
+        <segue reference="gyJ-kK-P92"/>
     </inferredMetricsTieBreakers>
 </document>

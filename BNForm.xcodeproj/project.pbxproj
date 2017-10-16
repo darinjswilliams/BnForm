@@ -32,6 +32,8 @@
 		C88272F71F85A729006589DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C88272F61F85A729006589DD /* GoogleService-Info.plist */; };
 		C88503AB1F8B4397000577F1 /* SafetyPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88503AA1F8B4397000577F1 /* SafetyPopUp.swift */; };
 		C88503AD1F8B43A9000577F1 /* RecallPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */; };
+		C8AD50841F91DAD0006FB787 /* SafetyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD50831F91DAD0006FB787 /* SafetyViewController.swift */; };
+		C8AD50941F91E034006FB787 /* RecallControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8AD50931F91E034006FB787 /* RecallControllerTableViewCell.swift */; };
 		C8F27FCA1F873E490061DF05 /* RecallProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F27FC91F873E490061DF05 /* RecallProducts.swift */; };
 		C8F27FCC1F8741C10061DF05 /* SafeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */; };
 /* End PBXBuildFile section */
@@ -215,6 +217,8 @@
 		C88272F61F85A729006589DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C88503AA1F8B4397000577F1 /* SafetyPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyPopUp.swift; sourceTree = "<group>"; };
 		C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallPopUp.swift; sourceTree = "<group>"; };
+		C8AD50831F91DAD0006FB787 /* SafetyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafetyViewController.swift; path = ../SafetyViewController.swift; sourceTree = "<group>"; };
+		C8AD50931F91E034006FB787 /* RecallControllerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecallControllerTableViewCell.swift; path = ../RecallControllerTableViewCell.swift; sourceTree = "<group>"; };
 		C8F27FC91F873E490061DF05 /* RecallProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallProducts.swift; sourceTree = "<group>"; };
 		C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeProducts.swift; sourceTree = "<group>"; };
 		DCE7CE3422323D5F74EA0AB6 /* Pods-BNFormTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNFormTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BNFormTests/Pods-BNFormTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 		C88272C71F85A58E006589DD /* BNForm */ = {
 			isa = PBXGroup;
 			children = (
+				C8AD50831F91DAD0006FB787 /* SafetyViewController.swift */,
+				C8AD50931F91E034006FB787 /* RecallControllerTableViewCell.swift */,
 				C8F27FC61F873DA00061DF05 /* Model */,
 				C81F099C1F8610DB009FBE93 /* BNForm.entitlements */,
 				C88272C81F85A58E006589DD /* AppDelegate.swift */,
@@ -823,6 +829,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8AD50841F91DAD0006FB787 /* SafetyViewController.swift in Sources */,
 				C88503AD1F8B43A9000577F1 /* RecallPopUp.swift in Sources */,
 				C88503AB1F8B4397000577F1 /* SafetyPopUp.swift in Sources */,
 				C81F09A21F871EA1009FBE93 /* ProductController.swift in Sources */,
@@ -830,6 +837,7 @@
 				C81D25561F87FE7F0079BC20 /* RecallSvc.swift in Sources */,
 				C88272CB1F85A58E006589DD /* ViewController.swift in Sources */,
 				C81D25641F8AF0BB0079BC20 /* ReportViewController.swift in Sources */,
+				C8AD50941F91E034006FB787 /* RecallControllerTableViewCell.swift in Sources */,
 				C81D25521F87F76C0079BC20 /* ProductSvc.swift in Sources */,
 				C8F27FCC1F8741C10061DF05 /* SafeProducts.swift in Sources */,
 				C88272C91F85A58E006589DD /* AppDelegate.swift in Sources */,
