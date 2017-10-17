@@ -13,6 +13,19 @@ class ProductSvcCache: ProductSvc{
     
     var safeProducts = [SafeProducts]()
     
+    
+    private init(){
+        
+    }
+    
+    private static var instance = ProductSvcCache()
+    
+    static func getInstance()->ProductSvc{
+        
+        return instance
+    }
+    
+    
     func create(safeProduct: SafeProducts) {
         safeProducts.append(safeProduct)
     }

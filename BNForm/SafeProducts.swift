@@ -10,14 +10,16 @@ import Foundation
 import UIKit
 
 class SafeProducts{
-    var description:String
-    var image:UIImage?
     
-    //["Rpt334568","Rpt878930","Rpt764893"]
+    var id:Int
+    var description:String
+    var image:UIImage? = nil
+    var notes:String
     
     init(){
         description = ""
-        image = nil
+        id = 0
+        notes = ""
     }
     
     
@@ -29,4 +31,15 @@ class SafeProducts{
         return description
     }
     
+    func getId()-> Int{
+        return id
+    }
+    
+    func getNotes()->String{
+        return notes;
+    }
+    
+    func toString()->String{
+        return "\(image) \(id) \(description)"
+    }
 }

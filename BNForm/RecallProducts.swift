@@ -16,19 +16,15 @@ class RecallProducts{
     var description:String
     var image:UIImage?
     var notes:String
-    var imgPhotos:String
+
     
     init(){
         description = ""
-        image = nil
         id = 0
         notes = ""
-        imgPhotos = ""
+        image = nil
     }
     
-    func getImgPhotos()->String{
-        return imgPhotos
-    }
     
     func getImage()->UIImage{
         return image!
