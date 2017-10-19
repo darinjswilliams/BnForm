@@ -33,6 +33,10 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     var safeProd = SafeProducts()
     
     
+    @IBAction func verifyProductScan(_ sender: Any) {
+        
+        performSegue(withIdentifier: "goToScan", sender: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
