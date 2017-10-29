@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import AlamofireRSSParser
 
-class ConsumerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ConsumerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
     
     @IBOutlet weak var recallTableView: UITableView!
@@ -21,17 +22,22 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     
     var recallProducts = [RecallProducts]()
     
+    var filterData = [RecallProducts]()
+    
     var recallSvcCache = RecallSvcCache.getInstance()
     
     var recallProd = RecallProducts()
     
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var isSearching = false
     
     var safeProducts = [SafeProducts]()
     
     var safetySvcCache = ProductSvcCache.getInstance()
     
     var safeProd = SafeProducts()
-    
     
     @IBAction func verifyProductScan(_ sender: Any) {
         
@@ -41,41 +47,18 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //call alamofire rss reader
+        rssFeedReader()
+        
+        
         //call alamofire
         alamofire()
-
-        // Do any additional setup after loading the view.
-//        let recallItem = RecallProducts()
-//        recallItem.image = UIImage(named: "handgunsecurity.jpg")!
-//        recallItem.description = "Hand Gun Security"
-//        recallItem.id = 456789
-//        self.recallSvcCache.create(recallProduct: recallItem)
-//        
-//        let recallItem2 = RecallProducts()
-//        recallItem2.image = UIImage(named: "weedwacker.jpg")!
-//        recallItem2.description = "Weed Wacker"
-//        recallItem2.id = 333456
-//        self.recallSvcCache.create(recallProduct: recallItem2)
-//   
-//        self.recallTableView.reloadData()
-//        
-//        
-//        let safetyItem = SafeProducts()
-//        safetyItem.image = UIImage(named: "weddingKnifes.jpg")!
-//        safetyItem.description = "Wedding Knifes"
-//        safetyItem.id = 82348
-//        self.safetySvcCache.create(safeProduct: safetyItem)
-//        
-//        
-//        let safetyItem2 = SafeProducts()
-//        safetyItem2.image = UIImage(named: "WiggleBall")!
-//        safetyItem2.description = "Wiggle Ball"
-//        safetyItem2.id = 23456
-//        self.safetySvcCache.create(safeProduct: safetyItem2)
-//    
-//        self.safetyTableView.reloadData()
-//        
         
+        //Setup the Search Controller
+        searchBar.delegate = self
+        
+        searchBar.returnKeyType = UIReturnKeyType.done
+  
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,17 +70,24 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
         
         var count:Int?
         
+        //return count on filter data if searching
+        if isSearching{
+            return filterData.count
+            
+        }
+        
         if tableView == self.recallTableView{
             count = self.recallSvcCache.retrieveAll().count
             print("Recall Svc Cache Count", count)
         }
         
-        if tableView == self.safetyTableView{
-            count = self.safetySvcCache.retrieveAll().count
-        }
-        
         return count!;
-               
+        
+    }
+    
+  
+    @IBAction func unwindSegueToVC(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
+        print("unwindSeque")
     }
     
     
@@ -107,11 +97,21 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
         
        var cellData:UITableViewCell?
         
-       
+        let foundTxt:String!
+        
         
         if tableView == self.recallTableView{
             
             let cellData  = self.recallTableView.dequeueReusableCell(withIdentifier: "RecallCells", for: indexPath)
+            
+            if isSearching{
+                
+                cellData.textLabel!.text = filterData[indexPath.row].description
+                
+                cellData.imageView!.image = filterData[indexPath.row].image
+            
+            
+            } else {
             
             
             //Get Text from DataSource
@@ -119,23 +119,10 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
             
             //Get Image
             cellData.imageView!.image = self.recallSvcCache.getRecallProduct(index: indexPath.row).image
-        
+            }
             
         }
-        
-        if tableView == self.safetyTableView{
-            
-            
-            let cellData = self.safetyTableView.dequeueReusableCell(withIdentifier: "SafetyCells", for: indexPath)
-            
-            //Get text
-            cellData.textLabel!.text = self.safetySvcCache.getSafeProduct(index: indexPath.row).description
-            
-            //Get image
-            
-            cellData.imageView!.image = self.safetySvcCache.getSafeProduct(index: indexPath.row).image
-            
-        }
+    
         
         if cellData != nil{
             return cellData!
@@ -163,9 +150,44 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            
+            isSearching = false
+            
+            view.endEditing(true)
+            
+            self.recallTableView.reloadData()
+            
+        } else {
+            
+            isSearching = true
+            
+//            filterData = data.
+            
+             self.recallTableView.reloadData()
+        }
+            
+            
+    }
+    
+    func rssFeedReader(){
+        
+        let url = "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS"
+        
+        Alamofire.request(url).responseRSS() { (response) -> Void in
+            if let feed: RSSFeed = response.result.value {
+                //do something with your new RSSFeed object!
+                for item in feed.items {
+                    print(item)
+                }
+            }
+        }
+        
+    }
     
         func alamofire(){
-            Alamofire.request("https://www.saferproducts.gov/RestWebServices/Recall?format=json&Images=Child&RecallDescription=metal&DateEnd=2016-01-01&ProductName=ball").responseJSON{ response in
+            Alamofire.request("https://www.saferproducts.gov/RestWebServices/Recall?format=json&Images=adult&RecallDateStart=2017-01-01&RecallEndDate=2017-01-10&ProductName=tv").responseJSON{ response in
     
     
                 if let value = response.result.value{
@@ -199,8 +221,7 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     
                                 //Populate Model RecallNumber
                                 recallProducts.id = Int(recallNumber)!
-    
-    
+
                             for prodDesc in aProduct as! [Dictionary<String, AnyObject>]{
     
                                 if let foundProdct = prodDesc["Name"] as? String{
@@ -231,7 +252,8 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
                                                 
                                                self.recallSvcCache.create(recallProduct: recallProducts)
                                                 self.recallTableView.reloadData()
-
+                                                
+                                            self.filterData.append(recallProducts)
                                                 
                                             }
                                         }
@@ -240,19 +262,9 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
                                   } //Closure for image
     
                                 }// Image for loop
-
-    //                            print(recallProducts.toString())
-                                //Add to array
-    //                            self.recallItems.append(recallProducts)
-    
-                            //Call service
-    
     
                           }
-//                        DispatchQueue.main.async {
-////                          self.recallSvcCache.create(recallProduct: recallProducts)
-//                            self.recallTableView.reloadData()
-//                        }
+
     
                     }
                     
@@ -264,14 +276,6 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
             
         }
 
-    /*
-    // MARK: - Navigation
+  }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
-}

@@ -11,6 +11,7 @@ target 'BNForm' do
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'AlamofireRSSParser'
 
   target 'BNFormTests' do
     inherit! :search_paths

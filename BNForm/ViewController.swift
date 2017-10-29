@@ -90,19 +90,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 //Sign in user with Firebase
                 
                  self.performSegue(withIdentifier: "goToHome", sender: self)
-//                Auth.auth().signIn(withEmail: emailAddr, password: passWrd, completion: { (user, error) in
-//                
-//                    //Check to see if user is not nil
-//                    if let u = user{
-//                        // User is found go to home screen
-//                        self.performSegue(withIdentifier: "goToHome", sender: self)
-//                        
-//                    }else{
-//                        //Error occurred Check Error and show message
-//                        
-//                    }
-//                    
-//                })
+                Auth.auth().signIn(withEmail: emailAddr, password: passWrd, completion: { (user, error) in
+                
+                    //Check to see if user is not nil
+                    if let u = user{
+                        // User is found go to home screen
+                        self.performSegue(withIdentifier: "goToHome", sender: self)
+                        
+                    }else{
+                        //Error occurred Check Error and show message
+                        
+                    }
+                    
+                })
                 
             }else{
                 //Register the User with Firebase
@@ -111,19 +111,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
 
                 
-//                Auth.auth().createUser(withEmail: emailAddr, password: passWrd, completion: { (user, error) in
-//                    
-//                    //Check to see if user is not nil
-//                    if let u = user{
-//                        // User is found go to home screen
-//                        self.performSegue(withIdentifier: "goToHome", sender: self)
-//                        
-//                    }else{
-//                        //Error occurred Check Error and show message
-//                        
-//                    }
-//                    
-//                })
+                Auth.auth().createUser(withEmail: emailAddr, password: passWrd, completion: { (user, error) in
+                    
+                    //Check to see if user is not nil
+                    if let u = user{
+                        // User is found go to home screen
+                        self.performSegue(withIdentifier: "goToHome", sender: self)
+                        
+                    }else{
+                        //Error occurred Check Error and show message
+                        
+                    }
+                    
+                })
                 
                
                 

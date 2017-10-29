@@ -15,8 +15,10 @@ class SafetyPopUp: UIViewController {
     
     @IBOutlet weak var imgPhoto: UIImageView!
     
-    @IBOutlet weak var recallNmber: UITextField!
     
+  
+    @IBOutlet weak var recallNumber: UILabel!
+
     
     @IBOutlet weak var recallNotes: UITextView!
     
@@ -26,6 +28,14 @@ class SafetyPopUp: UIViewController {
     var recallProducts = RecallProducts()
     
     
+    @IBAction func sharePressed(_ sender: Any) {
+        
+        let activityVC = UIActivityViewController(activityItems: [self.imgPhoto.image], applicationActivities: nil)
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityVC, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +59,7 @@ class SafetyPopUp: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print("view will appear", self.recallProducts.getDescription())
         
-        self.recallNmber?.text = String(self.recallProducts.getId())
+        self.recallNumber?.text = String(self.recallProducts.getId())
         self.recallNotes?.text = self.recallProducts.getNotes()
         
         self.imgPhoto?.image = recallProducts.getImage()

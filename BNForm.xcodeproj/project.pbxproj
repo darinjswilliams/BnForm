@@ -10,6 +10,7 @@
 		734287C77E3835621CE80849 /* Pods_BNForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CD1F25D7DEBCD5E0B91155 /* Pods_BNForm.framework */; };
 		B8D7AB5068E234025CC20650 /* Pods_BNFormTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E223D2708CA7416ACA816F78 /* Pods_BNFormTests.framework */; };
 		C478A3F24CDF5FF6748FC5E3 /* Pods_BNFormUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 578C60F7949784B9E18EE18C /* Pods_BNFormUITests.framework */; };
+		C80BC8171FA354F7008CF2A1 /* FeederController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80BC8161FA354F6008CF2A1 /* FeederController.swift */; };
 		C81D25521F87F76C0079BC20 /* ProductSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81D25511F87F76C0079BC20 /* ProductSvc.swift */; };
 		C81D25541F87F7860079BC20 /* ProductSvcCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81D25531F87F7860079BC20 /* ProductSvcCache.swift */; };
 		C81D25561F87FE7F0079BC20 /* RecallSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81D25551F87FE7F0079BC20 /* RecallSvc.swift */; };
@@ -190,6 +191,7 @@
 		77FB8A9E5172CBFB33CFF521 /* Pods-BNFormUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNFormUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BNFormUITests/Pods-BNFormUITests.release.xcconfig"; sourceTree = "<group>"; };
 		94CD1F25D7DEBCD5E0B91155 /* Pods_BNForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BNForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7BBAA5877F6B14020DAB24A /* Pods-BNForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BNForm/Pods-BNForm.debug.xcconfig"; sourceTree = "<group>"; };
+		C80BC8161FA354F6008CF2A1 /* FeederController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeederController.swift; sourceTree = "<group>"; };
 		C81D25511F87F76C0079BC20 /* ProductSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSvc.swift; sourceTree = "<group>"; };
 		C81D25531F87F7860079BC20 /* ProductSvcCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSvcCache.swift; sourceTree = "<group>"; };
 		C81D25551F87FE7F0079BC20 /* RecallSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallSvc.swift; sourceTree = "<group>"; };
@@ -218,9 +220,9 @@
 		C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallPopUp.swift; sourceTree = "<group>"; };
 		C8F27FC91F873E490061DF05 /* RecallProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallProducts.swift; sourceTree = "<group>"; };
 		C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeProducts.swift; sourceTree = "<group>"; };
-		C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerViewController.swift; sourceTree = "<group>"; };
+		C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsumerViewController.swift; path = ../ConsumerViewController.swift; sourceTree = "<group>"; };
 		C8F394D61F95AFF200D5E451 /* RecallTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallTableViewController.swift; sourceTree = "<group>"; };
-		C8F394D81F95B00700D5E451 /* SafetyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyTableViewController.swift; sourceTree = "<group>"; };
+		C8F394D81F95B00700D5E451 /* SafetyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafetyTableViewController.swift; path = ../SafetyTableViewController.swift; sourceTree = "<group>"; };
 		DCE7CE3422323D5F74EA0AB6 /* Pods-BNFormTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BNFormTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BNFormTests/Pods-BNFormTests.release.xcconfig"; sourceTree = "<group>"; };
 		E223D2708CA7416ACA816F78 /* Pods_BNFormTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BNFormTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -309,8 +311,6 @@
 		C88272BC1F85A58E006589DD = {
 			isa = PBXGroup;
 			children = (
-				C8F394D81F95B00700D5E451 /* SafetyTableViewController.swift */,
-				C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */,
 				C84FD3341F8F46ED009239FC /* AlamofireImage.xcodeproj */,
 				C84A56301F8DD61F00EE69D7 /* Alamofire.xcodeproj */,
 				C88272C71F85A58E006589DD /* BNForm */,
@@ -335,9 +335,12 @@
 		C88272C71F85A58E006589DD /* BNForm */ = {
 			isa = PBXGroup;
 			children = (
+				C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */,
+				C8F394D81F95B00700D5E451 /* SafetyTableViewController.swift */,
 				C8F27FC61F873DA00061DF05 /* Model */,
 				C81F099C1F8610DB009FBE93 /* BNForm.entitlements */,
 				C88272C81F85A58E006589DD /* AppDelegate.swift */,
+				C80BC8161FA354F6008CF2A1 /* FeederController.swift */,
 				C88272CA1F85A58E006589DD /* ViewController.swift */,
 				C88272CC1F85A58E006589DD /* Main.storyboard */,
 				C88272CF1F85A58E006589DD /* Assets.xcassets */,
@@ -466,6 +469,7 @@
 					C88272C41F85A58E006589DD = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = BU644T4498;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -735,6 +739,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BNForm/Pods-BNForm-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireRSSParser/AlamofireRSSParser.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -745,6 +751,8 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireRSSParser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -841,6 +849,7 @@
 				C88272C91F85A58E006589DD /* AppDelegate.swift in Sources */,
 				C8F394D51F95393F00D5E451 /* ConsumerViewController.swift in Sources */,
 				C81D25541F87F7860079BC20 /* ProductSvcCache.swift in Sources */,
+				C80BC8171FA354F7008CF2A1 /* FeederController.swift in Sources */,
 				C8F394D91F95B00700D5E451 /* SafetyTableViewController.swift in Sources */,
 				C8F27FCA1F873E490061DF05 /* RecallProducts.swift in Sources */,
 				C81D25601F8A8E7D0079BC20 /* ScanViewController.swift in Sources */,
@@ -1007,6 +1016,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BNForm/BNForm.entitlements;
 				DEVELOPMENT_TEAM = BU644T4498;
 				INFOPLIST_FILE = BNForm/Info.plist;
@@ -1014,6 +1024,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.consumer.BNForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BNForm/BNForm-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1024,6 +1036,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = BNForm/BNForm.entitlements;
 				DEVELOPMENT_TEAM = BU644T4498;
 				INFOPLIST_FILE = BNForm/Info.plist;
@@ -1031,6 +1044,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.consumer.BNForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BNForm/BNForm-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

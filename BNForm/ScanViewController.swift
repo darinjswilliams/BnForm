@@ -22,6 +22,20 @@ class ScanViewController: UIViewController {
     }
     
 
+    @IBAction func homeBtnPressed(_ sender: Any) {
+        print("HomeButton Pressed")
+        
+        performSegue(withIdentifier: "scanToHome", sender: self)
+    }
+    
+    @IBAction func scanShareBttn(_ sender: Any) {
+        let activityVC = UIActivityViewController(activityItems: ["www.google.com"], applicationActivities: nil)
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
     @IBAction func productSearch(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "goSearchProduct", sender: self)
