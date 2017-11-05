@@ -25,6 +25,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     @IBOutlet var signInRegisterButton: UIButton!
+    
+    
   
     var isSignIn:Bool = true
     

@@ -7,11 +7,24 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
+import AlamofireRSSParser
 
-class FeederController: UITableViewController {
+class FeederController: UIViewController,UITableViewDelegate, UITableViewDataSource{
 
+   
+    @IBOutlet weak var rssFeederTable: UITableView!
+    
+    var articleSvc = ArticleSvcCache.getInstance()
+    
+       
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //call alamofire rss reader
+        fetchRSSArticles()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -27,25 +40,91 @@ class FeederController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        
+        var count:Int?
+        
+        if tableView == self.rssFeederTable{
+            count = self.articleSvc.retrieveAll().count
+            print("RSSFeed Svc Cache Count", count)
+        }
+        
+        return count!;
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+   
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         // Configure the cell...
+        let cellData = self.rssFeederTable.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ArticleCell
 
-        return cell
+        
+    
+        cellData.title!.text = self.articleSvc.getArticle(index: indexPath.row).title
+        
+        cellData.desc!.text = self.articleSvc.getArticle(index: indexPath.row).desc
+        
+        
+
+        return cellData
     }
-    */
+    
+    
+    func fetchRSSArticles(){
+        
+        let url = "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS"
+        
+
+        Alamofire.request(url).responseRSS() { (response) -> Void in
+            if let feed: RSSFeed = response.result.value {
+                //do something with your new RSSFeed object!
+                
+                do{
+                    
+                    for item in feed.items {
+                        let rssArticle = Article()
+                        
+                        //Get title
+                        print(item.title)
+                        let title = item.title as! String
+                        rssArticle.title = title
+                        
+                        //Get description
+                        print(item.itemDescription)
+                        let desc = item.itemDescription as! String
+                        rssArticle.desc = desc
+                        
+                        
+                        //Get Link
+                        print(item.link)
+                        let urlLink = item.link as! String
+                        rssArticle.urlLink = urlLink as!String
+                        
+                        DispatchQueue.main.async {
+                            self.articleSvc.create(rssFeeder: rssArticle)
+                            self.rssFeederTable?.reloadData()
+                        }
+                    }
+                    
+                } catch let error{
+                    
+                    print(error)
+                }
+                
+                
+            }
+        }
+        
+    }
+
 
     /*
     // Override to support conditional editing of the table view.

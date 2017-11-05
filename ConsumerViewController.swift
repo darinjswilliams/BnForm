@@ -17,6 +17,7 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var recallTableView: UITableView!
     
 
+
     @IBOutlet weak var safetyTableView: UITableView!
     
     
@@ -28,7 +29,7 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     
     var recallProd = RecallProducts()
     
-    
+ 
     @IBOutlet weak var searchBar: UISearchBar!
     
     var isSearching = false
@@ -44,11 +45,11 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
         performSegue(withIdentifier: "goToScan", sender: self)
     }
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //call alamofire rss reader
-        rssFeedReader()
         
         
         //call alamofire
@@ -80,6 +81,9 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
             count = self.recallSvcCache.retrieveAll().count
             print("Recall Svc Cache Count", count)
         }
+        
+        
+        
         
         return count!;
         
@@ -122,8 +126,8 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
             }
             
         }
-    
         
+  
         if cellData != nil{
             return cellData!
         }
@@ -171,20 +175,6 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
             
     }
     
-    func rssFeedReader(){
-        
-        let url = "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS"
-        
-        Alamofire.request(url).responseRSS() { (response) -> Void in
-            if let feed: RSSFeed = response.result.value {
-                //do something with your new RSSFeed object!
-                for item in feed.items {
-                    print(item)
-                }
-            }
-        }
-        
-    }
     
         func alamofire(){
             Alamofire.request("https://www.saferproducts.gov/RestWebServices/Recall?format=json&Images=adult&RecallDateStart=2017-01-01&RecallEndDate=2017-01-10&ProductName=tv").responseJSON{ response in

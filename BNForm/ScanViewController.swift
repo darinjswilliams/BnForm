@@ -7,13 +7,113 @@
 //
 
 import UIKit
+import AVFoundation
 
-class ScanViewController: UIViewController {
 
+class CameraView:UIView{
+    
+    //display video as it is being capture by input device
+    override class var layerClass: AnyClass{
+        get{
+            return AVCaptureVideoPreviewLayer.self
+        }
+    }
+    
+    override var layer: AVCaptureVideoPreviewLayer{
+        get{
+            return super.layer as! AVCaptureVideoPreviewLayer
+        }
+    }
+}
+
+class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+    
+    var cameraView: CameraView!
+    
+    //capture session
+    let session = AVCaptureSession()
+    
+    //dispatch queue
+    let sessionQueue = DispatchQueue(label: AVCaptureSession.self.description(), attributes: [], target:nil)
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
+        //intialize session for scan
+        session.beginConfiguration()
+        
+        let videoDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        
+        if(videoDevice != nil){
+            
+           let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice)
+            
+            if(videoDeviceInput != nil){
+                
+                if(session.canAddInput(videoDeviceInput)){
+                    session.addInput(videoDeviceInput)
+                    
+                }
+                
+            }
+            
+            let metaDataOutput = AVCaptureMetadataOutput()
+            
+            if(session.canAddOutput(metaDataOutput)){
+                
+                session.addOutput(metaDataOutput)
+                
+                //Define the QR and bar types to read
+                metaDataOutput.metadataObjectTypes = [
+                
+                    AVMetadataObjectTypeEAN13Code,
+                    AVMetadataObjectTypeQRCode
+                
+                ]
+                
+                metaDataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            }
+            
+            
+        }
+        
+        session.commitConfiguration()
+        cameraView.layer.session = session
+        cameraView.layer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+        
+        //configure orientation
+        let videoOrientation: AVCaptureVideoOrientation
+        
+        switch UIApplication.shared.statusBarOrientation {
+        case .portrait:
+            videoOrientation = .portrait
+            
+        case .portraitUpsideDown:
+            videoOrientation = .portraitUpsideDown
+            
+        case .landscapeLeft:
+            videoOrientation = .landscapeLeft
+            
+        case .landscapeRight:
+            videoOrientation = .landscapeRight
+        
+       
+        default:
+            videoOrientation = .portrait
+        }
+        
+        cameraView.layer.connection.videoOrientation = videoOrientation
+        
+    }
+    
+    override func loadView() {
+        cameraView = CameraView()
+        
+        view = cameraView
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +145,67 @@ class ScanViewController: UIViewController {
     @IBAction func createReport(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "goCreateReport", sender: self)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        sessionQueue.async {
+            self.session.startRunning()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        sessionQueue.async {
+            self.session.stopRunning()
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+       
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        //update orientation
+        let videoOrientation: AVCaptureVideoOrientation
+        
+        switch  UIDevice.current.orientation {
+        case .portrait:
+            videoOrientation = .portrait
+            
+        case .portraitUpsideDown:
+            videoOrientation = .portraitUpsideDown
+            
+        case .landscapeLeft:
+            videoOrientation = .landscapeLeft
+            
+        case .landscapeRight:
+            videoOrientation = .landscapeRight
+            
+            
+        default:
+            videoOrientation = .portrait
+        }
+        
+        cameraView.layer.connection.videoOrientation = videoOrientation
+    }
+    
+    
+    //function that reads QR and Barcode
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
+        
+        if(metadataObjects.count > 0 && metadataObjects.first is AVMetadataMachineReadableCodeObject){
+            
+            let scan = metadataObjects.first as! AVMetadataMachineReadableCodeObject
+            
+            let alertController = UIAlertController(title: "Product Scanned", message: scan.stringValue, preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     /*

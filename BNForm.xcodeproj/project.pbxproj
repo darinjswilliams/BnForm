@@ -22,6 +22,10 @@
 		C84FD3301F8F35C8009239FC /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C84A563C1F8DD62000EE69D7 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C84FD34E1F8F472E009239FC /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C84FD3411F8F46ED009239FC /* AlamofireImage.framework */; };
 		C84FD34F1F8F472E009239FC /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C84FD3411F8F46ED009239FC /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C85CECB51FA5A41400E5C13A /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85CECB41FA5A41400E5C13A /* ArticleCell.swift */; };
+		C85CECB71FA5A76B00E5C13A /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85CECB61FA5A76B00E5C13A /* Article.swift */; };
+		C85CECB91FA5B68D00E5C13A /* ArticleSvc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85CECB81FA5B68D00E5C13A /* ArticleSvc.swift */; };
+		C85CECBB1FA5B77000E5C13A /* ArticleSvcCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C85CECBA1FA5B77000E5C13A /* ArticleSvcCache.swift */; };
 		C88272C91F85A58E006589DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88272C81F85A58E006589DD /* AppDelegate.swift */; };
 		C88272CB1F85A58E006589DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88272CA1F85A58E006589DD /* ViewController.swift */; };
 		C88272CE1F85A58E006589DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88272CC1F85A58E006589DD /* Main.storyboard */; };
@@ -32,6 +36,7 @@
 		C88272F71F85A729006589DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C88272F61F85A729006589DD /* GoogleService-Info.plist */; };
 		C88503AB1F8B4397000577F1 /* SafetyPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88503AA1F8B4397000577F1 /* SafetyPopUp.swift */; };
 		C88503AD1F8B43A9000577F1 /* RecallPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */; };
+		C8D9F8DC1FA9952A00082037 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D9F8DB1FA9952A00082037 /* ArticleTableViewCell.swift */; };
 		C8F27FCA1F873E490061DF05 /* RecallProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F27FC91F873E490061DF05 /* RecallProducts.swift */; };
 		C8F27FCC1F8741C10061DF05 /* SafeProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */; };
 		C8F394D51F95393F00D5E451 /* ConsumerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */; };
@@ -202,6 +207,10 @@
 		C81F09A11F871EA1009FBE93 /* ProductController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		C84A56301F8DD61F00EE69D7 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		C84FD3341F8F46ED009239FC /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = AlamofireImage/AlamofireImage.xcodeproj; sourceTree = "<group>"; };
+		C85CECB41FA5A41400E5C13A /* ArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		C85CECB61FA5A76B00E5C13A /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		C85CECB81FA5B68D00E5C13A /* ArticleSvc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleSvc.swift; sourceTree = "<group>"; };
+		C85CECBA1FA5B77000E5C13A /* ArticleSvcCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleSvcCache.swift; sourceTree = "<group>"; };
 		C88272C51F85A58E006589DD /* BNForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BNForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C88272C81F85A58E006589DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C88272CA1F85A58E006589DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +227,7 @@
 		C88272F61F85A729006589DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C88503AA1F8B4397000577F1 /* SafetyPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyPopUp.swift; sourceTree = "<group>"; };
 		C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallPopUp.swift; sourceTree = "<group>"; };
+		C8D9F8DB1FA9952A00082037 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
 		C8F27FC91F873E490061DF05 /* RecallProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecallProducts.swift; sourceTree = "<group>"; };
 		C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeProducts.swift; sourceTree = "<group>"; };
 		C8F394D41F95393F00D5E451 /* ConsumerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsumerViewController.swift; path = ../ConsumerViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +353,7 @@
 				C80BC8161FA354F6008CF2A1 /* FeederController.swift */,
 				C88272CA1F85A58E006589DD /* ViewController.swift */,
 				C88272CC1F85A58E006589DD /* Main.storyboard */,
+				C8D9F8DB1FA9952A00082037 /* ArticleTableViewCell.swift */,
 				C88272CF1F85A58E006589DD /* Assets.xcassets */,
 				C88272D11F85A58E006589DD /* LaunchScreen.storyboard */,
 				C88272D41F85A58E006589DD /* Info.plist */,
@@ -353,6 +364,7 @@
 				C88503AA1F8B4397000577F1 /* SafetyPopUp.swift */,
 				C88503AC1F8B43A9000577F1 /* RecallPopUp.swift */,
 				C8F394D61F95AFF200D5E451 /* RecallTableViewController.swift */,
+				C85CECB41FA5A41400E5C13A /* ArticleCell.swift */,
 			);
 			path = BNForm;
 			sourceTree = "<group>";
@@ -378,12 +390,15 @@
 		C8F27FC61F873DA00061DF05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C85CECB61FA5A76B00E5C13A /* Article.swift */,
 				C8F27FC91F873E490061DF05 /* RecallProducts.swift */,
 				C8F27FCB1F8741C10061DF05 /* SafeProducts.swift */,
 				C81D25511F87F76C0079BC20 /* ProductSvc.swift */,
 				C81D25531F87F7860079BC20 /* ProductSvcCache.swift */,
 				C81D25551F87FE7F0079BC20 /* RecallSvc.swift */,
 				C81D25571F87FE910079BC20 /* RecallSvcCache.swift */,
+				C85CECB81FA5B68D00E5C13A /* ArticleSvc.swift */,
+				C85CECBA1FA5B77000E5C13A /* ArticleSvcCache.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -843,13 +858,18 @@
 				C8F394D71F95AFF200D5E451 /* RecallTableViewController.swift in Sources */,
 				C81D25561F87FE7F0079BC20 /* RecallSvc.swift in Sources */,
 				C88272CB1F85A58E006589DD /* ViewController.swift in Sources */,
+				C85CECB91FA5B68D00E5C13A /* ArticleSvc.swift in Sources */,
 				C81D25641F8AF0BB0079BC20 /* ReportViewController.swift in Sources */,
 				C81D25521F87F76C0079BC20 /* ProductSvc.swift in Sources */,
 				C8F27FCC1F8741C10061DF05 /* SafeProducts.swift in Sources */,
+				C85CECBB1FA5B77000E5C13A /* ArticleSvcCache.swift in Sources */,
 				C88272C91F85A58E006589DD /* AppDelegate.swift in Sources */,
+				C85CECB71FA5A76B00E5C13A /* Article.swift in Sources */,
 				C8F394D51F95393F00D5E451 /* ConsumerViewController.swift in Sources */,
 				C81D25541F87F7860079BC20 /* ProductSvcCache.swift in Sources */,
+				C8D9F8DC1FA9952A00082037 /* ArticleTableViewCell.swift in Sources */,
 				C80BC8171FA354F7008CF2A1 /* FeederController.swift in Sources */,
+				C85CECB51FA5A41400E5C13A /* ArticleCell.swift in Sources */,
 				C8F394D91F95B00700D5E451 /* SafetyTableViewController.swift in Sources */,
 				C8F27FCA1F873E490061DF05 /* RecallProducts.swift in Sources */,
 				C81D25601F8A8E7D0079BC20 /* ScanViewController.swift in Sources */,
