@@ -56,6 +56,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 if(session.canAddInput(videoDeviceInput)){
                     session.addInput(videoDeviceInput)
                     
+                } else {
+                    
+                    scanNotPossible()
                 }
                 
             }
@@ -70,7 +73,9 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
                 metaDataOutput.metadataObjectTypes = [
                 
                     AVMetadataObjectTypeEAN13Code,
-                    AVMetadataObjectTypeQRCode
+                    AVMetadataObjectTypeQRCode,
+                    AVMetadataObjectTypeUPCECode,
+                    AVMetadataObjectTypeCode128Code
                 
                 ]
                 
@@ -108,6 +113,16 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         cameraView.layer.connection.videoOrientation = videoOrientation
         
+    }
+    
+    func scanNotPossible(){
+        
+        //let user know that scanning is possible with device
+        let alert =  UIAlertController(title: "Can not Scan device", message: "Update software", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+       present(alert, animated: true, completion: nil)
     }
     
     override func loadView() {
@@ -203,6 +218,10 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
             let alertController = UIAlertController(title: "Product Scanned", message: scan.stringValue, preferredStyle: .alert)
             
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            // Vibrate the device to give the user some feedback.
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+
             
             present(alertController, animated: true, completion: nil)
         }
