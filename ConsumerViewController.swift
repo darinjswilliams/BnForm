@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import AlamofireRSSParser
+import SwiftyJSON
 
 class ConsumerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate{
     
@@ -177,7 +178,16 @@ class ConsumerViewController: UIViewController, UITableViewDelegate, UITableView
     
     
         func alamofire(){
-            Alamofire.request("https://www.saferproducts.gov/RestWebServices/Recall?format=json&Images=adult&RecallDateStart=2017-01-01&RecallEndDate=2017-01-10&ProductName=tv").responseJSON{ response in
+   
+            let recallURL = "\(RECALL_URL)"
+            
+            Alamofire.request(recallURL).responseJSON{ response in
+                
+                
+                if((response.result.value) != nil) {
+                    let swiftyJsonVar = JSON(response.result.value!)
+                    print(swiftyJsonVar)
+                }
     
     
                 if let value = response.result.value{

@@ -213,28 +213,61 @@ class ScanViewController: UIViewController, AVCaptureMetadataOutputObjectsDelega
         
         if(metadataObjects.count > 0 && metadataObjects.first is AVMetadataMachineReadableCodeObject){
             
-            let scan = metadataObjects.first as! AVMetadataMachineReadableCodeObject
+           if let barCodeInfo = metadataObjects.first{
             
-            let alertController = UIAlertController(title: "Product Scanned", message: scan.stringValue, preferredStyle: .alert)
+              //turn into human readable
+            let barcodeReadable = barCodeInfo as? AVMetadataMachineReadableCodeObject;
             
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            if let readableCode = barcodeReadable{
+                
+                //send scan barcode down stream as readable code
+                detectedBarCode(code: readableCode.stringValue)
+             }
+            }//end of BarCodeInfo
+            
+        }
+    }
+        func detectedBarCode(code: String){
+            
+        
+            
+            let alertController = UIAlertController(title: "Found a Product Scanned", message: code, preferredStyle: UIAlertControllerStyle.alert)
+            
+            alertController.addAction(UIAlertAction(title: "Search", style: .default, handler: { action in
+            
+                // Remove the spaces.
+                let trimmedCode = code.trimmingCharacters(in:  NSCharacterSet.whitespaces)
+                
+                // EAN or UPC?
+                // Check for added "0" at beginning of code.
+                
+                let trimmedCodeString = "\(trimmedCode)"
+                var trimmedCodeNoZero: String
+                
+                if trimmedCodeString.hasPrefix("0") && trimmedCodeString.characters.count > 1 {
+                    trimmedCodeNoZero = String(trimmedCodeString.characters.dropFirst())
+                    
+                    // Send the doctored UPC to DataService.searchAPI()
+                    DataService.searchAPI(codeNumber: trimmedCodeNoZero)
+                    print("Trimmed code with zero..." ,trimmedCodeNoZero)
+                } else {
+                    
+                    // Send the doctored EAN to DataService.searchAPI()
+                    DataService.searchAPI(codeNumber: trimmedCodeString)
+                    print("Trimmed code with zero...", trimmedCode)
+                }
+
+            
+            }))
             
             // Vibrate the device to give the user some feedback.
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-
+            
             
             present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
+        
+    
 
 }

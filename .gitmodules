@@ -4,3 +4,6 @@
 [submodule "AlamofireImage"]
 	path = AlamofireImage
 	url = https://github.com/Alamofire/AlamofireImage.git
+[submodule "Nimble"]
+	path = Nimble
+	url = https://github.com/Quick/Nimble.git

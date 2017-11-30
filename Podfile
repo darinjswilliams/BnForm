@@ -12,11 +12,16 @@ target 'BNForm' do
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
   pod 'AlamofireRSSParser'
+  pod 'SwiftyJSON'
 
   target 'BNFormTests' do
+    use_frameworks!
     inherit! :search_paths
     # Pods for testing
- 
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'AlamofireRSSParser'
+    pod 'SwiftyJSON'
   end
 
   target 'BNFormUITests' do
